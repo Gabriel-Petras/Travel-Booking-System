@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Flight</title>
+</head>
+<body>
+    <h1>Book Flight</h1>
+
+    {% if message %}
+        <div class="alert">{{ message }}</div>
+    {% endif %}
+
+    <form method="POST">
+        <label for="guests">Number of Guests:</label>
+        <input type="number" name="guests" id="guests" required>
+        <button type="submit">Book Flight</button>
+    </form>
+</body>
+</html>
