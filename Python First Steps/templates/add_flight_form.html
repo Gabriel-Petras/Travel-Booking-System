@@ -1,0 +1,31 @@
+<!-- add_flight_form.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Flight</title>
+</head>
+<body>
+    <h2>Add New Flight</h2>
+    <form action="/add_flight" method="POST">
+        <div>
+            <label for="from">From:</label>
+            <input type="text" name="from" id="from" placeholder="Origin" required>
+        </div>
+        <div>
+            <label for="to">To:</label>
+            <input type="text" name="to" id="to" placeholder="Destination" required>
+        </div>
+        <div>
+            <label for="dates">Dates:</label>
+            <input type="text" name="dates" id="dates" placeholder="Apr 8 → Apr 15" required>
+        </div>
+        <div>
+            <label for="guests">Guests:</label>
+            <input type="number" name="guests" id="guests" value="1" required>
+        </div>
+        <button type="submit">Add Flight</button>
+    </form>
+</body>
+</html>
