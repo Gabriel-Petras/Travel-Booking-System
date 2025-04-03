@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Booking</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="content">
+            <header>
+                <h1>Travel Booking System</h1>
+                <nav>
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+            
+                        {% if 'user_id' in session %}
+                            <li><a href="{{ url_for('profile', user_id=session['user_id']) }}">{{ user.username }}</a></li>
+                            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                        {% else %}
+                            <li><a href="{{ url_for('login') }}">Log In</a></li>
+                            <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </header>
+            
+            <h1 class="book">Book Flight</h1>
+
+            {% if message %}
+            <div class="alert">{{ message }}</div>
+            {% endif %}
+
+            <form method="POST">
+                <label for="guests">Number of Guests:</label>
+                <input type="number" name="guests" id="guests" required>
+                <button type="submit">Book Flight</button>
+            </form>
+
+
+            
+        </div>
+        <footer>
+            <p>&copy; 2025 Travel Booking</p>
+        </footer>
+    </div>
+</body>
+
+</html>

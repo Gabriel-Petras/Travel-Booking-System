@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Travel Booking</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        .profile-info {
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="content">
+            <header>
+                <h1>Your Profile</h1>
+                <nav>
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+            
+                        {% if 'user_id' in session %}
+                            <li><a href="{{ url_for('profile', user_id=session['user_id']) }}">{{ user.username }}</a></li>
+                            <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                        {% else %}
+                            <li><a href="{{ url_for('login') }}">Log In</a></li>
+                            <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <section class="profile-info">
+                    <h1>Welcome, {{ user.username }}!</h1>
+                    <h1>Email: {{ user.email }}</h1>
+
+                    <h2>Your Bookings:</h2>
+
+                    {% if bookings %}
+                    <table border="1">
+                        <thead>
+                            <tr>
+                                <th>Flight</th>
+                                <th>Departure Date</th>
+                                <th>Return Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="info">
+                            {% for booking in bookings %}
+                            <tr>
+                                
+                                <td>
+                                    {% if booking.flight %}
+                                        {{ booking.flight.from_city }} to {{ booking.flight.to_city }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if booking.flight %}
+                                        {{ booking.flight.departure_date }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if booking.flight %}
+                                        {{ booking.flight.return_date }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('cancel_booking', booking_id=booking.id) }}">Cancel</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <p>You have no bookings yet.</p>
+                    {% endif %}
+                </section>
+            </main>
+        </div>
+        <footer>
+            <p>&copy; 2025 Travel Booking</p>
+        </footer>
+    </div>
+</body>
+
+</html>

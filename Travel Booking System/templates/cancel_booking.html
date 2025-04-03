@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Booking</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="content">
+            <header>
+                <h1>Travel Booking System</h1>
+                <nav>
+                    <ul>
+                        <li><a href="{{ url_for('home') }}">Home</a></li>
+
+                        {% if 'user_id' in session %}
+                        <li><a href="{{ url_for('profile', user_id=session['user_id']) }}">{{ user.username }}</a></li>
+                        <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                        {% else %}
+                        <li><a href="{{ url_for('login') }}">Log In</a></li>
+                        <li><a href="{{ url_for('signup') }}">Sign Up</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </header>
+            <div class="cancel">
+            <h1>Cancel Booking</h1>
+
+            <p>Are you sure you want to cancel your booking for the flight from {{ booking.flight.from_city }} to {{
+                booking.flight.to_city }}?</p>
+
+            <form method="POST">
+                <button type="submit">Yes, Cancel Booking</button>
+                <button href="{{ url_for('profile', user_id=session['user_id']) }}" >No, Go Back</a>
+            </form>
+
+        </div>
+
+    </div>
+    <footer>
+        <p>&copy; 2025 Travel Booking</p>
+    </footer>
+    </div>
+</body>
+
+</html>
